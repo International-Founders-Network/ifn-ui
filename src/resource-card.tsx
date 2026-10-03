@@ -93,7 +93,9 @@ export function ResourceCard({
         {isPresent(pills) ? <div className="flex flex-wrap justify-end gap-2">{pills}</div> : null}
       </div>
 
-      <Title className="mb-2 text-lg font-bold text-[var(--ink)]">{title}</Title>
+      <Title className="mb-2 text-lg font-bold text-pretty text-[var(--ink)]">
+        {keepLastWordsTogether(title)}
+      </Title>
       <p className="mb-6 flex-1 text-sm leading-relaxed text-[var(--ink-muted)]">{description}</p>
 
       {children}
@@ -146,6 +148,17 @@ export function ResourceCtaLink({
       {external ? <span className="sr-only">(opens in a new tab)</span> : null}
     </a>
   );
+}
+
+/**
+ * Joins the last two words of a 3+ word string title with a non-breaking space so a
+ * short last word never sits alone. Non-string titles pass through untouched.
+ */
+function keepLastWordsTogether(title: ReactNode): ReactNode {
+  if (typeof title !== "string") return title;
+  const trimmed = title.trim();
+  if (trimmed.split(/\s+/).length < 3) return title;
+  return trimmed.replace(/\s+(?=\S+$)/, " ");
 }
 
 function isPresent(node: ReactNode): boolean {
