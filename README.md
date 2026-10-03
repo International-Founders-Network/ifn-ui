@@ -257,7 +257,7 @@ const persona = getLibraryPersona(personaId) ?? LIBRARY_PERSONAS[0];
   optional `ReactNode` per option.
 - `StageSidebar`: heading and group label "Choose a stage". Full-width stage buttons with the
   name, and from `lg` up the description and a chevron on the active stage.
-- `LibraryBrowseLayout`: personas above a rounded panel, sidebar `lg:w-80` beside the main slot.
+- `LibraryBrowseLayout`: personas above a rounded panel, sidebar `lg:w-[17.5rem]` (280px) beside the main slot.
   Optional; use the pieces directly for other layouts.
 
 ## Development

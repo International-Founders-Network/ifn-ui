@@ -126,7 +126,7 @@ export function LibraryBrowseLayout({ personas, sidebar, children }: LibraryBrow
       <div className="mb-12 flex flex-col gap-8">{personas}</div>
       <div className="overflow-hidden rounded-3xl border border-[var(--ink-muted)]/20 bg-[var(--paper)]">
         <div className="flex flex-col lg:flex-row">
-          <div className="shrink-0 border-b border-[var(--ink-muted)]/20 bg-[var(--paper-deep)] lg:w-80 lg:border-b-0 lg:border-r">
+          <div className="shrink-0 border-b border-[var(--ink-muted)]/20 bg-[var(--paper-deep)] lg:w-[17.5rem] lg:border-b-0 lg:border-r">
             {sidebar}
           </div>
           <div className="flex flex-1 flex-col p-8 lg:p-12">{children}</div>
