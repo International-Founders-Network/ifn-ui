@@ -224,6 +224,42 @@ Empty state:
 />
 ```
 
+## Library browse chrome
+
+Persona tabs and the stage sidebar from landing `Resources.tsx`. Same controlled contract:
+the app owns the active persona and stage, and URLs.
+
+```tsx
+import { Rocket } from "lucide-react";
+import { LIBRARY_PERSONAS, LibraryBrowseLayout, PersonaTabs, StageSidebar, getLibraryPersona } from "@ifn/ui";
+
+const persona = getLibraryPersona(personaId) ?? LIBRARY_PERSONAS[0];
+
+<LibraryBrowseLayout
+  personas={
+    <PersonaTabs
+      options={LIBRARY_PERSONAS.map((p) => ({ id: p.id, label: p.name, icon: icons[p.id] }))}
+      value={persona.id}
+      onChange={(id) => { setPersonaId(id); setStageId(getLibraryPersona(id)!.stages[0].id); }}
+    />
+  }
+  sidebar={<StageSidebar stages={persona.stages} value={stageId} onChange={setStageId} />}
+>
+  {stageHeaderFiltersAndCards}
+</LibraryBrowseLayout>
+```
+
+- `LIBRARY_PERSONAS`: ids, names and stages (`id`, `name`, `description`) copied from landing
+  `resourcesData.ts`. Taxonomy only, no resources. International Expansion is
+  `global_expansion` to match landing; r2 maps may key it as `global-expansion`, so map that in
+  the app. `getLibraryPersona(id)` looks one up.
+- `PersonaTabs`: `role="group"`, label "Choose who you are", `aria-pressed` chips. `icon` is an
+  optional `ReactNode` per option.
+- `StageSidebar`: heading and group label "Choose a stage". Full-width stage buttons with the
+  name, and from `lg` up the description and a chevron on the active stage.
+- `LibraryBrowseLayout`: personas above a rounded panel, sidebar `lg:w-80` beside the main slot.
+  Optional; use the pieces directly for other layouts.
+
 ## Development
 
 ```sh
