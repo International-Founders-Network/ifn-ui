@@ -29,3 +29,20 @@ export {
   type ResultCountProps,
 } from "./resource-filters";
 export { NoMatch, type NoMatchProps } from "./no-match";
+export {
+  LIBRARY_PERSONAS,
+  getLibraryPersona,
+  type LibraryPersona,
+  type LibraryPersonaId,
+  type LibraryStage,
+} from "./library-taxonomy";
+export {
+  LibraryBrowseLayout,
+  PersonaTabs,
+  StageSidebar,
+  type LibraryBrowseLayoutProps,
+  type PersonaTabOption,
+  type PersonaTabsProps,
+  type StageOption,
+  type StageSidebarProps,
+} from "./library-browse";

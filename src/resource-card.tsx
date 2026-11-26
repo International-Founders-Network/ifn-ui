@@ -93,7 +93,7 @@ export function ResourceCard({
         {isPresent(pills) ? <div className="flex flex-wrap justify-end gap-2">{pills}</div> : null}
       </div>
 
-      <Title className="mb-2 text-lg font-bold text-[var(--ink)]">{title}</Title>
+      <Title className="mb-2 text-lg font-bold text-[var(--ink)]">{renderTitle(title)}</Title>
       <p className="mb-6 flex-1 text-sm leading-relaxed text-[var(--ink-muted)]">{description}</p>
 
       {children}
@@ -145,6 +145,24 @@ export function ResourceCtaLink({
       {icon}
       {external ? <span className="sr-only">(opens in a new tab)</span> : null}
     </a>
+  );
+}
+
+/**
+ * Wraps the last two words of a 3+ word string title in a nowrap span, joined by a
+ * non-breaking space, so a short last word never sits alone on its own line.
+ * Non-string titles and titles under three words pass through untouched.
+ */
+function renderTitle(title: ReactNode): ReactNode {
+  if (typeof title !== "string") return title;
+  const words = title.trim().split(/\s+/);
+  if (words.length < 3) return title;
+  const lead = words.slice(0, -2).join(" ");
+  const tail = words.slice(-2).join("\u00A0");
+  return (
+    <>
+      {lead} <span className="whitespace-nowrap">{tail}</span>
+    </>
   );
 }
 
